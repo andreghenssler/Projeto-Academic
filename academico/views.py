@@ -4,11 +4,8 @@ from .forms import CursoForm, AlunoForm
 from django.shortcuts import redirect
 
 # Create your views here.
-
-
 def index(request):
     return render(request, 'academico/index.html')
-
 
 def alunos(request):
     alunos = Aluno.objects.all()
@@ -37,7 +34,6 @@ def cadastrar_aluno(request):
             'form': form,
         }
     return render(request, 'academico/cadastrar_aluno.html', dados)
-
 
 def cadastrar_curso(request):
 
@@ -82,3 +78,21 @@ def editar_aluno(request, id):
     }
 
     return render(request, 'academico/editar_aluno.html', dados)
+
+def editar_curso(request, id):
+    try:
+        curso = Curso.objects.get(id=id)
+    except:
+        return redirect('cursos')
+    if request.method == 'POST':
+        form = CursoForm(request.POST, instance=curso)
+        if form.is_valid():
+            form.save()
+            return redirect('cursos')
+    
+    form = CursoForm(instance=curso)
+    dados = {
+        'form': form,
+        'curso': curso,
+    }
+    return render(request, 'academico/editar_curso.html', dados)
