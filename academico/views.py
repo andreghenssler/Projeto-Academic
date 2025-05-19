@@ -46,7 +46,7 @@ def cadastrar_curso(request):
             curso = form.cleaned_data['nome']
             print(curso)
             form.save()
-            return redirect('alunos')  # Redireciona para a lista de alunos
+            return redirect('cursos')  # Redireciona para a lista de alunos
     else:
         form = CursoForm()
         dados = {
