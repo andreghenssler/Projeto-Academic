@@ -17,6 +17,12 @@ def alunos(request):
     }
     return render(request, 'academico/lista_alunos.html', dados)
 
+def cursos(request):
+    cursos = Curso.objects.all()
+    dados = {
+        'cursos': cursos,
+    }
+    return render(request, 'academico/lista_cursos.html', dados)
 
 def cadastrar_aluno(request):
 
