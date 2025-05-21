@@ -27,7 +27,7 @@ class AlunoForm(forms.ModelForm):
         widgets = {
             'nome': forms.TextInput(attrs={'class': 'form-control'}),
             'data_nascimento': forms.DateInput(attrs={'class': 'form-control'}),
-            'cpf': forms.TextInput(attrs={'maxlength': '14','placeholder': '000.000.000-00','class': 'form-control'}),
+            'cpf': forms.TextInput(attrs={'maxlength': '14','class': 'form-control'}),
             'genero': forms.Select(attrs={'class': 'form-control'}),
             'estado_civil': forms.Select(attrs={'class': 'form-control'}),
             'escolaridade': forms.Select(attrs={'class': 'form-control'}),
