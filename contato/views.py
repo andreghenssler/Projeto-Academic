@@ -2,9 +2,7 @@ from django.shortcuts import render
 from . import forms
 from django.core.mail import send_mail
 
-
 def contato(request):
-
     if request.method == 'POST':
         form = forms.ContatoForm(request.POST)
         if form.is_valid():
@@ -22,13 +20,19 @@ def contato(request):
                 ['andrehenssler@sou.faccat.br'],  # destinatário
             )
 
-            form = forms.ContatoForm()
+            form = forms.ContatoForm()  # Limpa o formulário após envio
             dados = {
                 'form': form,
                 'mensagem_enviada': True,
                 'mensagem': 'Mensagem enviada com sucesso!',
             }
-
+        else:
+            # Formulário inválido — mantemos os dados preenchidos e avisamos
+            dados = {
+                'form': form,
+                'mensagem_enviada': False,
+                'mensagem': 'Por favor, corrija os erros no formulário.',
+            }
     else:
         # Se o método não for POST, cria um novo formulário vazio
         form = forms.ContatoForm()
